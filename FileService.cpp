@@ -29,7 +29,7 @@ FileService::~FileService() {
 }
 
 bool FileService::endswith(string str, string suffix) {
-  int pos = str.rfind(suffix);
+  size_t pos = str.rfind(suffix);
   return pos == (str.length() - suffix.length());
 }
 

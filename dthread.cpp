@@ -20,7 +20,7 @@ void set_log_file(std::string file_name) {
 }
 
 void sync_print(std::string function, std::string payload) {
-  int ret = pthread_mutex_lock(&print_lock);
+  size_t ret = pthread_mutex_lock(&print_lock);
   if (ret != 0) {
     std::cerr << "pthread lock mutex error!" << std::endl;
     exit(1);
@@ -29,7 +29,7 @@ void sync_print(std::string function, std::string payload) {
   // search through our thread list to find this thread
   pthread_t self = pthread_self();
   int tid = -1;
-  for (int idx = 0; idx < thread_list.size(); idx++) {
+  for (size_t idx = 0; idx < thread_list.size(); idx++) {
     if (pthread_equal(self, thread_list[idx])) {
       tid = idx;
       break;
