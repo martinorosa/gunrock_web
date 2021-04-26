@@ -46,7 +46,7 @@ void sync_print(std::string function, std::string payload) {
   write_stream << function << " thread: " << tid << " " << payload << std::endl;
   std::string write_buffer = write_stream.str();
   ret = write(logFd, write_buffer.c_str(), write_buffer.length());
-  if (ret != write_buffer.length()) {
+  if (ret >= 0 && (size_t) ret != write_buffer.length()) {
     std::cerr << "log file write error, ret = " << ret << " expected " << write_buffer.length() << std::endl;
     exit(1);
   }
